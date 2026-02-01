@@ -24,7 +24,7 @@
                             {% for project, project_data in family_data.items() %}
                                 <tr>
                                     {% if family == "specials" %}
-                                        {% if project in ["wikidata", "wikifunctions", "wikisource"] %}
+                                        {% if project in ["mediawiki", "wikidata", "wikifunctions", "wikisource"] %}
                                             <td><a href="https://{{project}}.org/wiki/Special:LintErrors">{{project}}</a></td>
                                         {% else %}
                                             <td><a href="https://{{project}}.wikimedia.org/wiki/Special:LintErrors">{{project}}</a></td>
