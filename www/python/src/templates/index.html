@@ -26,6 +26,8 @@
                                     {% if family == "specials" %}
                                         {% if project in ["mediawiki", "wikidata", "wikifunctions", "wikisource"] %}
                                             <td><a href="https://{{project}}.org/wiki/Special:LintErrors">{{project}}</a></td>
+                                        {% elif project == "thankyou" %}
+                                            <td><a href="https://{{project}}.wikipedia.org/wiki/Special:LintErrors">{{project}}</a></td>
                                         {% else %}
                                             <td><a href="https://{{project}}.wikimedia.org/wiki/Special:LintErrors">{{project}}</a></td>
                                         {% endif %}
