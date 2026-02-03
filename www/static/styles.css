@@ -17,7 +17,7 @@ h4 {
     font-size: 15px !important;
 }
 tr.closed {
-    background-color: grey;
+    background-color: lightgrey;
 }
 tr.fishbowl {
     background-color: pink;
