@@ -22,7 +22,13 @@
                             </thead>
                             <tbody>
                             {% for project, project_data in family_data.items() %}
-                                <tr>
+                                {% if project_data[1] %}
+                                    <tr class="closed">
+                                {% elif project_data[2] %}
+                                    <tr class="fishbowl">
+                                {% else %}
+                                    <tr>
+                                {% endif %}
                                     {% if family == "specials" %}
                                         {% if project in ["mediawiki", "wikidata", "wikifunctions", "wikisource"] %}
                                             <td><a href="https://{{project}}.org/wiki/Special:LintErrors">{{project}}</a></td>
@@ -34,7 +40,7 @@
                                     {% else %}
                                         <td><a href="https://{{project}}.{{family}}.org/wiki/Special:LintErrors">{{project}}</a></td>
                                     {% endif %}
-                                    <td>{{project_data}}</td>
+                                    <td>{{project_data[0]}}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>

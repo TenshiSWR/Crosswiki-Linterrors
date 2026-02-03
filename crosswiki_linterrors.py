@@ -22,26 +22,27 @@ for sites in sitematrix:
         for site in sites:
             if "private" in site.keys():
                 continue
-            projects["specials"].append(site["url"])
+            else:
+                projects["specials"].append([site["url"], "closed" in site.keys(), "fishbowl" in site.keys()])
     else:
         sites = sitematrix[sites]["site"]
         for site in sites:
             if site["code"] == "wiki":
                 site["code"] = "wikipedia"
-            projects[site["code"]].append(site["url"])
+            projects[site["code"]].append([site["url"], "closed" in site.keys(), "fishbowl" in site.keys()])
 
 print("Sitematrix:", datetime.utcnow()-timing[-1], datetime.utcnow())
 timing.append(datetime.utcnow())
 
 for name, family in projects.items():
     for project in family:
-        if regex.match("(?:beta|test)", project):
+        if regex.search("(?:beta|test)", project[0]):
             continue
         try:
-            r = requests.get(project+api_string, headers=USER_AGENT, allow_redirects=False)
+            r = requests.get(project[0]+api_string, headers=USER_AGENT, allow_redirects=False)
             if "warnings" in loads(r.text).keys():
                 continue
-            lint_errors[name][regex.match(r"https://([^\.]*).", project.replace("www.", "")).group(1)] = loads(r.text)
+            lint_errors[name][regex.search(r"https://([^\.]*).", project[0].replace("www.", "")).group(1)] = [loads(r.text), project[1], project[2]]
         except JSONDecodeError as exception:
             print(project, exception)
         except Exception as exception:
